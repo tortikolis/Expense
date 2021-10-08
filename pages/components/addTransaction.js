@@ -1,10 +1,13 @@
+import { useState, useContext } from "react";
+import { ExpenseContext } from "../context/expense-context";
 
-import { useState } from "react";
 
-
-export const AddTransaction = (props) => {
+const AddTransaction = () => {
     const [textInput, setTextInput] = useState("");
     const [amountInput, setAmountInput] = useState("");
+
+    const { dispatch} = useContext(ExpenseContext);
+
 
     const handleTextInput = (e) => {
         e.preventDefault();
@@ -25,10 +28,17 @@ export const AddTransaction = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
-        props.sendFormData(textInput, amountInput); 
+        dispatch({
+            type: "ADD_EXPENSE",
+            payload: {
+                expense: textInput,
+                expenseAmount: isNaN(parseInt(amountInput)) ? 0 : parseInt(amountInput),
+                id: Date.now()
+            }
+        }) 
         clearDataFromInputs();
     }
-    //console.log(textInput)
+    
     return(
         
         <div>
@@ -42,8 +52,10 @@ export const AddTransaction = (props) => {
                 <label htmlFor="amount" >Amount <br /> (negative - expense, positive - income) </label>
                 <input value={amountInput} onChange={handleAmountInput} type="number" id="amount" placeholder="Enter amount..." />
             </div>
-            <button onClick={handleSubmit} className="btn">Add transaction</button>
+            <button onClick={handleSubmit} disabled={amountInput === ""} className="btn">Add transaction</button>
             </form>
         </div>
     )
 }
+
+export default AddTransaction;

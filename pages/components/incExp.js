@@ -1,9 +1,12 @@
+import { ExpenseContext } from "../context/expense-context";
+import { useContext } from "react";
 
-export const IncExp = ({expenseList}) => {
+const IncExp = () => {
+        const {state} = useContext(ExpenseContext);
    
         let income = 0.00;
         let expense = 0.00;
-        expenseList.forEach(item => {
+        state.expenseList.forEach(item => {
           if(item.expenseAmount > 0) income += item.expenseAmount;
           if(item.expenseAmount < 0) expense += item.expenseAmount;
         })
@@ -23,3 +26,5 @@ export const IncExp = ({expenseList}) => {
 
     )
 }
+
+export default IncExp;

@@ -1,9 +1,11 @@
+import { ExpenseContext } from "../context/expense-context";
+import { useContext } from "react";
 
-export const HistoryItem = ({ removeItem, text, amount, id}) => {
+const HistoryItem = ({ text, amount, id}) => {
+    const {dispatch} = useContext(ExpenseContext);
 
     const handleRemovingItem = (e) => {
-        console.log(e.target)
-        removeItem(id)
+        dispatch({type: "REMOVE_EXPENSE", payload: id})
     }
 
     const liClass = amount > -1 ? "plus" : "minus";
@@ -16,3 +18,5 @@ export const HistoryItem = ({ removeItem, text, amount, id}) => {
 
     )
 }
+
+export default HistoryItem;

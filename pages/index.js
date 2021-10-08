@@ -4,7 +4,9 @@ const Home = () => {
 
 
   return (
-    <MyApp />
+
+      <MyApp />
+
   )
 }
 

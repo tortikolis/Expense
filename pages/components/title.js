@@ -1,4 +1,6 @@
 
-export const Title = () => (
+const Title = () => (
     <h2>Expense Tracker</h2>
 )
+
+export default Title;

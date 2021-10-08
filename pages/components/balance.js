@@ -1,8 +1,12 @@
-import React from 'react';
+import { ExpenseContext } from "../context/expense-context";
+import { useContext } from "react";
 
-export const Balance = ({expenseList}) => {
+const Balance = () => {
+
+    const {state} = useContext(ExpenseContext);
+
     let total = 0.00;
-    expenseList.forEach(expense => total += expense.expenseAmount);
+    state.expenseList.forEach(expense => total += expense.expenseAmount);
     return (
         <div>
             <h4>Your Balance</h4>
@@ -10,3 +14,5 @@ export const Balance = ({expenseList}) => {
         </div>
     )
 }
+
+export default Balance;
